@@ -1,0 +1,23 @@
+header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin:100px auto;
+}
+
+header>button{
+    width: 375rem;
+    padding: 2rem;
+    text-transform: uppercase;
+}
+
+header>button#add{
+    width:10rem !important;
+}
+
+#boxSignIn,
+#btnSignUp,
+#boxSignUp,
+#boxInsert{
+    display: none;
+}
