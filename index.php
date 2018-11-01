@@ -1,7 +1,14 @@
 <?php
     session_start();
-    if(isset($_SESSION['email'])){
-        header('location:accueil.php');
+    if(isset($_SESSION['role'])){
+      switch ($_SESSION['role']) {
+        case 'ADMIN':
+          header('location:admin/gestion.php');
+          exit();
+        default:
+          header('location:client/accueil.php');
+          exit();
+      }
     }
 ?>
 <!DOCTYPE html>
@@ -18,10 +25,18 @@
 <body>
     <main class="container">
 
-        <header>
-            <button class="btn btn-primary btnSign" id="client">Client</button>
-            <button class="btn btn-primary btnSign" id="admin">Administrateur</button>
+        <header id="topBtn">
+            <button class="btn btn-info btnSign" id="client">Client</button>
+            <button class="btn btn-info btnSign" id="admin">Administrateur</button>
         </header>
+
+        <div>
+
+          <p class="text-danger text-center">
+            <?= (isset($_GET['acces']) && $_GET['acces'] == 'false')?'<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;Pour accéder à cette page veuillez d\'abord vous authentifiez en tant qu\'administrateur':'';?>
+          </p>
+
+        </div>
 
         <div id="boxSignIn">
             <h3 class="text-info">Connexion</h3>
@@ -38,7 +53,7 @@
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-success col-2" value="connexion">
-                    <button id="btnSignUp" class="btn btn-info col-2">S'inscrire</button>
+                    <button id="btnSignUp" type="button" class="btn btn-info col-2">S'inscrire</button>
                 </div>
             </form>
         </div>
@@ -75,7 +90,7 @@
                 </div>
             </form>
         </div>
-        
+
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="js/app.js"></script>

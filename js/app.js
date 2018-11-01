@@ -18,7 +18,7 @@
         });
 
         //show form to add a new product
-        $('#add').on('click',function(){ 
+        $('#add').on('click',function(){
             $('#boxInsert').show();
         });
 
@@ -31,7 +31,7 @@
         showProducts(products,'#productList tbody');
         /**
          * @desc get products info
-         * @param {Array} products data 
+         * @param {Array} products data
          * @param {String} tableBody tbody element
          */
         function showProducts(products,tableBody){
@@ -77,7 +77,7 @@
         }
 
         //Get products for customer
-        
+
 
         //request from client to php server in order to sign in or sign up
         $('form').on('submit',function(e){
@@ -90,23 +90,26 @@
                 data:$(this).serialize(),
                 success:function(data){
                     console.log('data',data);
-                    if(data == 'connexion'){
-                        window.location.replace('accueil.php');
+                    if(data == 'admin'){
+                      window.location.replace('admin/gestion.php');
+                    }
+                    else if(data == 'client'){
+                        window.location.replace('client/accueil.php');
                     }
                     else if(data == 'inscription'){
                         $('#userMsg').text('Votre compte a été crée, veuillez vous connecter.');
+                        $('#btnSignUp').hide();
+                        $('#boxSignUp').hide();
                         $('.btnSign:first-of-type').trigger('click');
                     }
                     else if(data == 'ajout'){
                         var tbody = '#productList tbody';
-                        //$(tbody).parent().empty();
                         showProducts(products, tbody);
                     }
                     else{
-                        console.log('else');
-                        
+                        console.log('sucess mais ni ajout ni connexion');
                         $('#userMsg').text(data);
-                    } 
+                    }
                 },
                 error : function(){
                     console.log('erreur');

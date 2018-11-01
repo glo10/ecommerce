@@ -1,19 +1,39 @@
-header{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin:100px auto;
+#topBtn,
+nav,
+.memberSpace{
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-header>button{
-    width: 375rem;
-    padding: 2rem;
+#topBtn{
     text-transform: uppercase;
+    margin:1.5rem auto;
 }
 
-header>button#add{
-    width:10rem !important;
+#topBtn>button{
+  width: 375rem;
+  padding: 2rem;
 }
+
+nav{
+  justify-content: flex-start;
+
+}
+
+nav div:first-of-type{
+  margin-right: 19rem;
+}
+
+nav input[type="search"]{
+  width:23rem;
+}
+
+.memberSpace{
+  justify-content: flex-end;
+}
+
+
 
 #boxSignIn,
 #btnSignUp,

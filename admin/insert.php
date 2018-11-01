@@ -1,14 +1,15 @@
 <?php
     session_start();
-    $_SESSION['email'] = "admin@admin.com";
+    if(!isset($_SESSION['role']) && $_SESSION['role'] != 'ADMIN')
+      header('location:../index.php?acces=false');
     if(
-        isset($_POST['name'])           && 
-        !empty($_POST['name'])          && 
-        isset($_POST['price'])          && 
+        isset($_POST['name'])           &&
+        !empty($_POST['name'])          &&
+        isset($_POST['price'])          &&
         !empty($_POST['price'])         &&
-        isset($_POST['description'])    && 
-        !empty($_POST['description'])   && 
-        isset($_POST['quantite'])       && 
+        isset($_POST['description'])    &&
+        !empty($_POST['description'])   &&
+        isset($_POST['quantite'])       &&
         !empty($_POST['quantite'])
     ){
         require_once '../bdd/bdd_connect.php';
@@ -26,7 +27,7 @@
                                         :prix_produit,
                                         :description_produit
                     )';
-        
+
         $insertProduit = $pdo->prepare($reqProduit);
         $insertProduit->bindParam(':nom_produit',$_POST['name']);
         $insertProduit->bindParam(':prix_produit',$_POST['price']);
@@ -49,7 +50,7 @@
             $insertGestion->bindParam(':email_admin',$_SESSION['email']);
             $insertGestion->bindParam(':id_produit',$idProduit);
             $insertGestion->bindParam(':stock',$_POST['quantite']);
-            
+
             if($insertGestion->execute()){
                 $pdo->commit();
                 echo 'ajout';

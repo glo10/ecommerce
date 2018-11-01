@@ -1,22 +1,35 @@
 <?php
     if(
-        isset($_POST['lastName'])   && 
-        !empty($_POST['lastName'])  && 
-        isset($_POST['firstName'])  && 
+        isset($_POST['lastName'])   &&
+        !empty($_POST['lastName'])  &&
+        isset($_POST['firstName'])  &&
         !empty($_POST['firstName']) &&
-        isset($_POST['email'])      && 
-        !empty($_POST['email'])     && 
-        isset($_POST['old'])        && 
+        isset($_POST['email'])      &&
+        !empty($_POST['email'])     &&
+        isset($_POST['old'])        &&
         !empty($_POST['old'])       &&
-        isset($_POST['mdp'])        && 
+        isset($_POST['mdp'])        &&
         !empty($_POST['mdp'])       &&
-        isset($_POST['mdpConfirm']) && 
+        isset($_POST['mdpConfirm']) &&
         !empty($_POST['mdpConfirm'])
     ){
         require_once 'bdd_connect.php';
         array_map('htmlspecialchars', $_POST);
-        $request = 'INSERT INTO membre(nom,prenom,age,email,mdp)
-                    VALUES(:nom,:prenom,:age,:email,:mdp)';
+        $request = 'INSERT INTO client(
+                                        nom_client,
+                                        prenom_client,
+                                        age_client,
+                                        email_client,
+                                        mdp_client
+                                      )
+                                      VALUES(
+                                            :nom,
+                                            :prenom,
+                                            :age,
+                                            :email,
+                                            :mdp
+                                      )';
+
         $mdp = password_hash($_POST['mdp'],PASSWORD_BCRYPT);
         $insert = $pdo->prepare($request);
         $insert->bindParam(':nom',$_POST['lastName']);
