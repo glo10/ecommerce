@@ -1,6 +1,8 @@
 #topBtn,
 nav,
-.memberSpace{
+.memberSpace,
+#market,
+#boxContentA{
   display: flex;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -33,11 +35,34 @@ nav input[type="search"]{
   justify-content: flex-end;
 }
 
-
+.thumbnail img{
+  width: 150px;
+  height: 150px;
+}
 
 #boxSignIn,
 #btnSignUp,
 #boxSignUp,
 #boxInsert{
     display: none;
+}
+
+#boxContentA{
+  justify-content: space-between;
+}
+
+#market{
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.thumbnail{
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+.cart{
+  position: relative;
+  bottom: 142px;
+  left: 122px;
 }
